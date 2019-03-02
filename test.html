@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div{
+			width: 100px;
+			height: 100px;
+			padding: 20px;
+			border: 10px solid #000;
+			background: red;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<button>显示</button>
+	<button>隐藏</button>
+	<div class="transition"></div>
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script src="js/showhide.js"></script>
+<script>
+
+var $elem = $('div')
+
+$elem.showHide({
+	js:true,
+	mode:'slideLeftRight'
+});
+
+$elem.on('show shown hide hidden',function(event){
+	if(event.type == 'show'){
+		console.log('show...')
+	}else if(event.type == 'shown'){
+		console.log('shown...')
+	}else if(event.type == 'hide'){
+		console.log('hide ...')
+	}else if(event.type == 'hidden'){
+		console.log('hidden..')
+	}
+})
+
+$('button').eq(0).on('click',function(){
+	$elem.showHide('show');
+})
+$('button').eq(1).on('click',function(){
+	$elem.showHide('hide');
+})
+
+</script>
+</html>
