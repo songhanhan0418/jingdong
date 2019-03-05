@@ -21,5 +21,31 @@
 			})
 		})
 	});
+	var $search = $('.header .search');
+
+	$search.on('getData',function(ev,data){
+		var html = getSearchLayerHtml(data,10)
+		$search.search('appendHtml',html)
+		if(html == ''){
+			$search.search('hideLayer')
+		}else{
+			$search.search('showLayer')
+		}
+	})
+
+	$search.on('getNoData',function(){
+		$search.search('appendHtml','');
+		$search.search('hideLayer')
+	});
+	function getSearchLayerHtml(data,maxNum){
+		var html = '';
+		for(var i = 0;i<data.result.length;i++){
+			if(i >= maxNum) break
+			html += '<li class="search-item">'+data.result[i][0]+'</li>'
+		}
+		return html
+	}
+
+	$search.search()
 	
 })(jQuery); 
